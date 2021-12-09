@@ -6,8 +6,10 @@ headerName = "../../ORBIS_Skeleton/GNM_Framework/basic_quad/FileNames.h"
 def CreateHeader(data):
    try:
       headerFile = open(headerName, "x")
-      headerFile.write("const char* files[]{\n")
-      headerFile.write("} ")
+      headerFile.write("#include <string>\n\n")
+      headerFile.write("namespace ImportFileNames{\n")
+      headerFile.write("std::string files[]{\n")
+      headerFile.write("}};")
       headerFile.close()
    except FileExistsError:
       pass
@@ -17,7 +19,7 @@ def CreateHeader(data):
    listOfLines = headerFile.readlines()
 
    listOfLines[len(listOfLines) - 1] = data
-   listOfLines.append("}")
+   listOfLines.append("};}")
 
    headerFile = open(headerName, "w")
    headerFile.writelines(listOfLines)
